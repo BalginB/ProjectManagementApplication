@@ -1,0 +1,156 @@
+﻿<Window x:Class="ProjectManagementApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Task Board" Height="600" Width="1000" Background="#3E1062" ResizeMode="NoResize">
+    <Grid>
+        <!-- Sidebar -->
+        <Grid Background="#2B1040" Margin="10,10,815,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя часть боковой панели -->
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Task Board" FontSize="18" FontWeight="Bold" Foreground="White" Margin="10,20,10,10"/>
+            </StackPanel>
+            <Label Content="Dashboard" HorizontalAlignment="Left" Margin="28,62,0,0" VerticalAlignment="Top" Height="25" Width="84" Opacity="0.6" Foreground="White"/>
+            <Label Content="Projects" HorizontalAlignment="Left" Margin="28,92,0,0" VerticalAlignment="Top" Height="30" Width="84" Opacity="0.6" Foreground="White"/>
+            <Label Content="Board" HorizontalAlignment="Left" Margin="28,122,0,0" VerticalAlignment="Top" Height="25" Width="84" Opacity="0.6" Foreground="White"/>
+            <Label Content="Log out" HorizontalAlignment="Left" Margin="28,499,0,0" VerticalAlignment="Top" Height="35" Width="84" Opacity="0.6" Foreground="White"/>
+            <Border BorderBrush="Black" BorderThickness="1"/>
+        </Grid>
+
+        <!-- Main content area -->
+        <Grid Margin="180,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="333*"/>
+                <ColumnDefinition Width="487*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Header -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="37,20,0,0" Grid.Column="1">
+                <TextBlock Text="Oct 2, 2024" FontSize="16" Foreground="White"/>
+            </StackPanel>
+
+            <!-- Toolbar -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,80,0,0" Grid.ColumnSpan="2">
+                <Grid Width="410" Height="30" Background="#4A3C6E">
+                    <TextBox Width="280" Height="25" Margin="5,0,0,0" Background="Transparent" Foreground="White" BorderThickness="0" VerticalContentAlignment="Center"/>
+                    <TextBlock Text="Search tasks..." Foreground="#888888" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </Grid>
+                <Button Content="Add people" Width="100" Margin="10,0" Foreground="White" Background="#4A3C6E" BorderThickness="0" />
+                <Button Content="Add task" Width="100" Margin="10,0" Foreground="White" Background="#4A3C6E" BorderThickness="0" Click="ButtonAddTask_Clicked" Cursor="Arrow" />
+                <Button Content="My tasks" Width="100" Margin="10,0" Foreground="White" Background="#4A3C6E" BorderThickness="0" />
+            </StackPanel>
+
+            <!-- Task Board Columns -->
+            <Grid Margin="20,150,20,20" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- TO DO Column -->
+                <Border Grid.Column="0" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                    <Grid AllowDrop="True"
+                          DragEnter="Column_DragEnter"
+                          DragOver="Column_DragOver"
+                          Drop="Column_Drop">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Заголовок колонки -->
+                        <TextBlock Text="TO DO" FontWeight="Bold" Foreground="White" Margin="10"/>
+                        <!-- Панель задач -->
+                        <StackPanel x:Name="ToDo_Panel" Grid.Row="1" Background="Transparent">
+                            <!-- Задачи будут добавляться сюда -->
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- IN PROGRESS Column -->
+                <Border Grid.Column="1" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                    <Grid AllowDrop="True"
+                          DragEnter="Column_DragEnter"
+                          DragOver="Column_DragOver"
+                          Drop="Column_Drop">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Заголовок колонки -->
+                        <TextBlock Text="IN PROGRESS" FontWeight="Bold" Foreground="White" Margin="10"/>
+                        <!-- Панель задач -->
+                        <StackPanel x:Name="InProgressPanel" Grid.Row="1" Background="Transparent">
+                            <!-- Задачи будут добавляться сюда -->
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- CODE REVIEW Column -->
+                <Border Grid.Column="2" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                    <Grid AllowDrop="True"
+                          DragEnter="Column_DragEnter"
+                          DragOver="Column_DragOver"
+                          Drop="Column_Drop">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Заголовок колонки -->
+                        <TextBlock Text="CODE REVIEW" FontWeight="Bold" Foreground="White" Margin="10"/>
+                        <!-- Панель задач -->
+                        <StackPanel x:Name="CodeReviewPanel" Grid.Row="1" Background="Transparent">
+                            <!-- Задачи будут добавляться сюда -->
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- QA Column -->
+                <Border Grid.Column="3" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                    <Grid AllowDrop="True"
+                          DragEnter="Column_DragEnter"
+                          DragOver="Column_DragOver"
+                          Drop="Column_Drop">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Заголовок колонки -->
+                        <TextBlock Text="QA" FontWeight="Bold" Foreground="White" Margin="10"/>
+                        <!-- Панель задач -->
+                        <StackPanel x:Name="QAPanel" Grid.Row="1" Background="Transparent">
+                            <!-- Задачи будут добавляться сюда -->
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- DONE Column -->
+                <Border Grid.Column="4" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                    <Grid AllowDrop="True"
+                          DragEnter="Column_DragEnter"
+                          DragOver="Column_DragOver"
+                          Drop="Column_Drop">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Заголовок колонки -->
+                        <TextBlock Text="DONE" FontWeight="Bold" Foreground="White" Margin="10"/>
+                        <!-- Панель задач -->
+                        <StackPanel x:Name="DonePanel" Grid.Row="1" Background="Transparent">
+                            <!-- Задачи будут добавляться сюда -->
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
