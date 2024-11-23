@@ -44,6 +44,9 @@ namespace ProjectManagementApplication
             CreateTaskUI(taskItem);
         }
 
+
+        
+
         private void CreateTaskUI(TaskItem taskItem)
         {
             var taskContainer = new Border
@@ -94,6 +97,8 @@ namespace ProjectManagementApplication
                 }
             };
 
+            
+
             // Событие для сохранения изменений описания
             taskDescriptionInput.LostFocus += (s, e) =>
             {
@@ -128,6 +133,37 @@ namespace ProjectManagementApplication
                 Children = { taskIdTextBlock, taskDescriptionInput }
             };
 
+            
+                var contextMenu = new ContextMenu();
+                var deleteMenuItem = new MenuItem
+                {
+                    Header = "Delete",
+                };
+
+                deleteMenuItem.Click += (s, e) =>
+                {
+                    var parentPanel = taskContainer.Parent as Panel;
+                    if (parentPanel != null)
+                    {
+                        parentPanel.Children.Remove(taskContainer);
+                    }
+
+                    // Удаляем задачу из базы данных
+                    var id = (int)taskContainer.Tag;
+                    var taskToRemove = _context.TaskItems.Find(id);
+                    if (taskToRemove != null)
+                    {
+                        _context.TaskItems.Remove(taskToRemove);
+                        _context.SaveChanges();
+                        Debug.WriteLine($"Удалена задача с ID: {id}");
+                    }
+                };
+
+                contextMenu.Items.Add(deleteMenuItem);
+                taskContainer.ContextMenu = contextMenu;
+
+
+
             // Добавляем задачу в соответствующую колонку
             switch (taskItem.Status)
             {
@@ -151,6 +187,24 @@ namespace ProjectManagementApplication
                     break;
             }
         }
+
+        //private void DeleteTask(Border taskContainer)
+        //{
+        //    taskContainer.MouseRightButtonDown += (s, e) =>
+        //    {
+        //        var changeTaskListBox = new ListBox
+        //        {
+        //            Width = 50,
+        //            Height = 20,
+        //            ItemsSource = "Delete",
+        //            Background = new SolidColorBrush(Color.FromRgb(92, 90, 132)),
+        //            Margin = new Thickness(5),
+        //            Padding = new Thickness(10),
+        //        };
+        //    };
+        //}
+
+
 
         private void LoadTasks()
         {
