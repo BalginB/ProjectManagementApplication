@@ -1,17 +1,18 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using SQLitePCL; // Добавьте это пространство имён
+using SQLitePCL; 
 
 namespace ProjectManagementApplication
 {
     public partial class MainWindow : Window
     {
         private TaskBoardContext _context;
+      
 
         public MainWindow()
         {
@@ -43,9 +44,6 @@ namespace ProjectManagementApplication
             // Создаем визуальный элемент задачи
             CreateTaskUI(taskItem);
         }
-
-
-        
 
         private void CreateTaskUI(TaskItem taskItem)
         {
@@ -81,6 +79,7 @@ namespace ProjectManagementApplication
                 Text = taskItem.Description
             };
 
+
             taskDescriptionInput.GotFocus += (s, args) =>
             {
                 if (taskDescriptionInput.Text == "Введите описание задачи")
@@ -96,8 +95,6 @@ namespace ProjectManagementApplication
                     taskDescriptionInput.Text = "Введите описание задачи";
                 }
             };
-
-            
 
             // Событие для сохранения изменений описания
             taskDescriptionInput.LostFocus += (s, e) =>
@@ -119,13 +116,51 @@ namespace ProjectManagementApplication
                 }
             };
 
-            // Событие для начала перетаскивания
-            taskContainer.MouseMove += (s, e) =>
+            // Переменные для отслеживания состояния перетаскивания
+            Point mouseStartPoint = new Point();
+            bool isDragging = false;
+
+            // Обработка событий мыши для перетаскивания
+            taskContainer.MouseLeftButtonDown += (s, e) =>
+            {
+                mouseStartPoint = e.GetPosition(null);
+                isDragging = false;
+                taskContainer.CaptureMouse();
+            };
+
+            taskContainer.PreviewMouseMove += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
-                    DragDrop.DoDragDrop(taskContainer, new DataObject(typeof(Border), taskContainer), DragDropEffects.Move);
+                    Point currentPosition = e.GetPosition(null);
+                    Vector diff = currentPosition - mouseStartPoint;
+
+                    if (!isDragging)
+                    {
+                        // Проверяем, переместилась ли мышь достаточно, чтобы начать перетаскивание
+                        if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                            Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
+                        {
+                            isDragging = true;
+
+                            // Инициируем операцию перетаскивания
+                            try
+                            {
+                                DragDrop.DoDragDrop(taskContainer, new DataObject(typeof(Border), taskContainer), DragDropEffects.Move);
+                            }
+                            catch (InvalidOperationException ex)
+                            {
+                                Debug.WriteLine($"DragDrop exception: {ex.Message}");
+                                // Опционально: уведомить пользователя или обработать ошибку иначе
+                            }
+                        }
+                    }
                 }
+            };
+
+            taskContainer.PreviewMouseLeftButtonUp += (s, e) =>
+            {
+                taskContainer.ReleaseMouseCapture();
             };
 
             taskContainer.Child = new StackPanel
@@ -133,36 +168,35 @@ namespace ProjectManagementApplication
                 Children = { taskIdTextBlock, taskDescriptionInput }
             };
 
-            
-                var contextMenu = new ContextMenu();
-                var deleteMenuItem = new MenuItem
+            // Добавляем контекстное меню для удаления задачи
+            var contextMenu = new ContextMenu();
+            var deleteMenuItem = new MenuItem
+            {
+                Header = "Delete",
+            };
+
+            deleteMenuItem.Click += (s, e) =>
+            {
+                // Удаляем задачу из родительского контейнера
+                var parentPanel = taskContainer.Parent as Panel;
+                if (parentPanel != null)
                 {
-                    Header = "Delete",
-                };
+                    parentPanel.Children.Remove(taskContainer);
+                }
 
-                deleteMenuItem.Click += (s, e) =>
+                // Удаляем задачу из базы данных
+                var id = (int)taskContainer.Tag;
+                var taskToRemove = _context.TaskItems.Find(id);
+                if (taskToRemove != null)
                 {
-                    var parentPanel = taskContainer.Parent as Panel;
-                    if (parentPanel != null)
-                    {
-                        parentPanel.Children.Remove(taskContainer);
-                    }
+                    _context.TaskItems.Remove(taskToRemove);
+                    _context.SaveChanges();
+                    Debug.WriteLine($"Удалена задача с ID: {id}");
+                }
+            };
 
-                    // Удаляем задачу из базы данных
-                    var id = (int)taskContainer.Tag;
-                    var taskToRemove = _context.TaskItems.Find(id);
-                    if (taskToRemove != null)
-                    {
-                        _context.TaskItems.Remove(taskToRemove);
-                        _context.SaveChanges();
-                        Debug.WriteLine($"Удалена задача с ID: {id}");
-                    }
-                };
-
-                contextMenu.Items.Add(deleteMenuItem);
-                taskContainer.ContextMenu = contextMenu;
-
-
+            contextMenu.Items.Add(deleteMenuItem);
+            taskContainer.ContextMenu = contextMenu;
 
             // Добавляем задачу в соответствующую колонку
             switch (taskItem.Status)
@@ -187,24 +221,6 @@ namespace ProjectManagementApplication
                     break;
             }
         }
-
-        //private void DeleteTask(Border taskContainer)
-        //{
-        //    taskContainer.MouseRightButtonDown += (s, e) =>
-        //    {
-        //        var changeTaskListBox = new ListBox
-        //        {
-        //            Width = 50,
-        //            Height = 20,
-        //            ItemsSource = "Delete",
-        //            Background = new SolidColorBrush(Color.FromRgb(92, 90, 132)),
-        //            Margin = new Thickness(5),
-        //            Padding = new Thickness(10),
-        //        };
-        //    };
-        //}
-
-
 
         private void LoadTasks()
         {
