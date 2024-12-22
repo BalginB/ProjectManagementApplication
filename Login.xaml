@@ -14,20 +14,13 @@
 
         <Image Source="/Images/close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgCLose}"/>
 
-        <Border>
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#3AA9AD" Offset="0"/>
-                    <GradientStop Color="#3AADA1" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-
+        <Border Style="{StaticResource gradientColor}">
             <Grid>
                 <Canvas>
-                    <Polygon Points="0, 20 230, 140 0, 270" Fill="#4eb1b6"/>
-                    <Polygon Points="100, 400 200, 370 180, 470" Fill="#4eb1b6"/>
-                    <Ellipse Margin="250 350 0 0" Width="40" Height="40" Fill="#4eb1b6"/>
-                    <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#4eb1b6"/>
+                    <Polygon Points="0, 20 230, 140 0, 270" Fill="#9C7CAE"/>
+                    <Polygon Points="100, 400 200, 370 180, 470" Fill="#503A5D"/>
+                    <Ellipse Margin="250 350 0 0" Width="40" Height="40" Fill="#8a33cc"/>
+                    <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#A18AAE"/>
                 </Canvas>
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Sign Up" Style="{StaticResource titleText}"/>
@@ -39,7 +32,7 @@
     
          <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Sign in to App" Style="{StaticResource titleText}" Foreground="#3ab19b"/>
+                <TextBlock Text="Sign in to App" Style="{StaticResource titleText}" Foreground="#8a33cc"/>
                 <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">
                     <Button Style="{StaticResource buttonCircle}">
                         <Image Source="/Images/google.png" Width="20" Height="20"/>

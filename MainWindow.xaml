@@ -5,50 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManagementApplication"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Task Board" Height="600" Width="1000" Background="#3E1062" ResizeMode="NoResize">
+        Title="Task Board" Height="600" Width="1000" WindowStyle="None" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize">
     <Grid>
-        <!-- Sidebar -->
-        <Grid Background="#2B1040" Margin="10,10,815,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Image Source="/Images/close.png" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgCLose}" Margin="0,-2,0,0" Height="26" Width="23"/>
+        <Border Style="{StaticResource gradientColor}" Margin="0,0,0,-1">
 
-            <!-- Верхняя часть боковой панели -->
-            <StackPanel Grid.Row="0">
-                <TextBlock Text="Task Board" FontSize="18" FontWeight="Bold" Foreground="White" Margin="10,20,10,10"/>
-            </StackPanel>
-            <Label Content="Dashboard" HorizontalAlignment="Left" Margin="28,62,0,0" VerticalAlignment="Top" Height="25" Width="84" Opacity="0.6" Foreground="White"/>
-            <Label Content="Projects" HorizontalAlignment="Left" Margin="28,92,0,0" VerticalAlignment="Top" Height="30" Width="84" Opacity="0.6" Foreground="White"/>
-            <Label Content="Board" HorizontalAlignment="Left" Margin="28,122,0,0" VerticalAlignment="Top" Height="25" Width="84" Opacity="0.6" Foreground="White"/>
-            <Label Content="Log out" HorizontalAlignment="Left" Margin="28,499,0,0" VerticalAlignment="Top" Height="35" Width="84" Opacity="0.6" Foreground="White"/>
-            <Border BorderBrush="Black" BorderThickness="1"/>
-        </Grid>
+            <Grid Margin="10,10,815,10">
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Верхняя часть боковой панели -->
+                <TextBlock Text="Balgin" Foreground="White" FontSize="22" FontWeight="Bold" Margin="10, 10"/>
+                <!--<Border BorderBrush="Black" BorderThickness="1"/>-->
+                <ListBox Margin="0,78,66,10"  Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource SidePanelItemStyle}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBoxItem Content="Dashboard" Height="40" />
+                    <ListBoxItem Content="Projects" />
+                    <ListBoxItem Content="Boards" />
+                    <ListBoxItem Content="Log out" Height="35" VerticalAlignment="Bottom" Margin="0, 270"/>
+                </ListBox>
+
+            </Grid>
+
+        </Border>
         <!-- Main content area -->
-        <Grid Margin="180,0,0,0">
+        <Grid Margin="97,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="333*"/>
                 <ColumnDefinition Width="487*"/>
             </Grid.ColumnDefinitions>
             <!-- Header -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="37,20,0,0" Grid.Column="1">
-                <TextBlock Text="Oct 2, 2024" FontSize="16" Foreground="White"/>
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="37,20,0,0" Grid.Column="1"/>
 
             <!-- Toolbar -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,80,0,0" Grid.ColumnSpan="2">
-                <Grid Width="410" Height="30" Background="#4A3C6E">
-                    <TextBox Width="280" Height="25" Margin="5,0,0,0" Background="Transparent" Foreground="White" BorderThickness="0" VerticalContentAlignment="Center"/>
-                    <TextBlock Text="Search tasks..." Foreground="#888888" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                </Grid>
-                <Button Content="Add people" Width="100" Margin="10,0" Foreground="White" Background="#4A3C6E" BorderThickness="0" />
-                <Button Content="Add task" Width="100" Margin="10,0" Foreground="White" Background="#4A3C6E" BorderThickness="0" Click="ButtonAddTask_Clicked" Cursor="Arrow" />
-                <Button Content="My tasks" Width="100" Margin="10,0" Foreground="White" Background="#4A3C6E" BorderThickness="0" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="163,20,0,0" Width="351" Grid.Column="1" Height="39">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource mainWindowButtons}" />
+                </StackPanel.Resources>
+                <Button Content="Add task"  Click="ButtonAddTask_Clicked" RenderTransformOrigin="0.513,0.486"/>
+                <Button Content="Add people" />
+                <Button Content="My tasks"/>
             </StackPanel>
 
             <!-- Task Board Columns -->
-            <Grid Margin="20,150,20,20" Grid.ColumnSpan="2">
+            <Grid Margin="20,91,20,20" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -61,7 +64,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- TO DO Column -->
-                <Border Grid.Column="0" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                <Border Grid.Column="0" Background="#9370DB" Margin="5" CornerRadius="10">
                     <Grid AllowDrop="True"
                           DragEnter="Column_DragEnter"
                           DragOver="Column_DragOver"
@@ -80,26 +83,27 @@
                 </Border>
 
                 <!-- IN PROGRESS Column -->
-                <Border Grid.Column="1" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                <Border Grid.Column="1" Background="#E6E6FA" Margin="5" CornerRadius="10">
                     <Grid AllowDrop="True"
                           DragEnter="Column_DragEnter"
                           DragOver="Column_DragOver"
                           Drop="Column_Drop">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="172*"/>
+                            <RowDefinition Height="255*"/>
                         </Grid.RowDefinitions>
                         <!-- Заголовок колонки -->
-                        <TextBlock Text="IN PROGRESS" FontWeight="Bold" Foreground="White" Margin="10"/>
+                        <TextBlock Text="IN PROGRESS" FontWeight="Bold" Foreground="White" Margin="10,10,10,10"/>
                         <!-- Панель задач -->
-                        <StackPanel x:Name="InProgressPanel" Grid.Row="1" Background="Transparent">
+                        <StackPanel x:Name="InProgressPanel" Grid.Row="1" Background="Transparent" Grid.RowSpan="2">
                             <!-- Задачи будут добавляться сюда -->
                         </StackPanel>
                     </Grid>
                 </Border>
 
                 <!-- CODE REVIEW Column -->
-                <Border Grid.Column="2" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                <Border Grid.Column="2" Background="#826888" Margin="5" CornerRadius="10">
                     <Grid AllowDrop="True"
                           DragEnter="Column_DragEnter"
                           DragOver="Column_DragOver"
@@ -118,7 +122,7 @@
                 </Border>
 
                 <!-- QA Column -->
-                <Border Grid.Column="3" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                <Border Grid.Column="3" Background="#8B7495" Margin="5" CornerRadius="10">
                     <Grid AllowDrop="True"
                           DragEnter="Column_DragEnter"
                           DragOver="Column_DragOver"
@@ -137,7 +141,7 @@
                 </Border>
 
                 <!-- DONE Column -->
-                <Border Grid.Column="4" Background="#4D4C7D" Margin="5" CornerRadius="10">
+                <Border Grid.Column="4" Background="#967FA4" Margin="5" CornerRadius="10">
                     <Grid AllowDrop="True"
                           DragEnter="Column_DragEnter"
                           DragOver="Column_DragOver"
@@ -155,6 +159,42 @@
                     </Grid>
                 </Border>
             </Grid>
+
+
+            <!-- Поле ввода -->
+
+            <Grid Margin="20,20,373,0" VerticalAlignment="Top" Height="39" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Стиль для TextBox -->
+                <TextBox x:Name="searchBox"
+             Grid.Column="0"
+             Background="#5D467A"
+             Foreground="White"
+             BorderBrush="#775A91"
+             FontSize="13"
+             VerticalContentAlignment="Center"
+             HorizontalContentAlignment="Left"
+             Padding="10"
+             Style="{StaticResource RoundedTextBoxStyle}" Margin="4,0,14,0"/>
+
+                <Button Content="🔍"
+            Background="#5D467A"
+            Foreground="White"
+            Width="38"
+            Height="39"
+            BorderBrush="#775A91"
+            FontSize="16"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Style="{StaticResource RoundedButtonStyle}" Margin="458,0,0,0" RenderTransformOrigin="1.145,0.548"/>
+            </Grid>
+
+
+
         </Grid>
     </Grid>
 </Window>

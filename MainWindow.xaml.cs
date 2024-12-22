@@ -53,8 +53,8 @@ namespace ProjectManagementApplication
                 CornerRadius = new CornerRadius(10),
                 Margin = new Thickness(5),
                 Padding = new Thickness(10),
-                Width = 130,
-                Height = 70,
+                Width = 150,
+                Height = 85,
                 Tag = taskItem.ID // Используем Tag для хранения ID задачи
             };
 
@@ -315,6 +315,11 @@ namespace ProjectManagementApplication
                 }
             }
             e.Handled = true;
+        }
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
