@@ -17,6 +17,7 @@ A **WPF-based Project Management Application** designed to streamline task manag
 - **Task Deletion**: Right-click on a task to delete it.
 - **Task Description Editing**: Click into a task card to update its details.
 - **Real-time Updates**: Tasks are saved to a local SQLite database for persistence.
+![image_2024-12-27_17-49-51](https://github.com/user-attachments/assets/b3af74ca-d73f-4ecc-a0ce-c583021985aa)
 
 ### User Interface
 - **Gradient Design**: A visually appealing gradient background and card styling.
@@ -28,7 +29,7 @@ A **WPF-based Project Management Application** designed to streamline task manag
 ## Screenshots
 
 ### Task Board (Main Window)
-![Task Board](./path_to_screenshot_1.png)
+![image_2024-12-27_17-22-48](https://github.com/user-attachments/assets/deacf928-bc84-4173-b239-2ef97c7a0c03)
 
 The task board is divided into five stages:
 - **To Do**: For newly created tasks.
@@ -38,7 +39,7 @@ The task board is divided into five stages:
 - **Done**: Completed tasks.
 
 ### Login Page
-![Login Page](./path_to_screenshot_2.png)
+![image_2024-12-27_17-23-32](https://github.com/user-attachments/assets/7183624f-d988-4c5c-8f58-eaa08decb0ab)
 
 The login page features:
 - An option to sign in using an email and password.
