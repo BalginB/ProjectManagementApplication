@@ -26,8 +26,6 @@ A **WPF-based Project Management Application** designed to streamline task manag
 
 ---
 
-## Screenshots
-
 ### Task Board (Main Window)
 ![image_2024-12-27_17-22-48](https://github.com/user-attachments/assets/deacf928-bc84-4173-b239-2ef97c7a0c03)
 
