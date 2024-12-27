@@ -1,47 +1,58 @@
 # Project Management Application (WPF)
 
-A **WPF (Windows Presentation Foundation)** application for basic project/task management. This project provides a simple **kanban-style board** to manage tasks across different statuses (To Do, In Progress, Code Review, QA, and Done). It also includes a **Login** screen and uses **SQLite** for local data storage.
-
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Technologies](#technologies)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Folder Structure](#folder-structure)
-- [Credits](#credits)
+A **WPF-based Project Management Application** designed to streamline task management using a **Kanban-style board**. The application allows users to track the progress of tasks through various stages like "To Do," "In Progress," "Code Review," "QA," and "Done". It also features a modern login interface with support for third-party integrations.
 
 ---
 
 ## Features
 
-1. **Login Page**  
-   - Simple login check (no real credential validation, just checks if the fields are not empty).
-   - Social media buttons (Google, GitHub, LinkedIn) that open in a browser.
+### Login System
+- **Secure Login**: Users can log in using their email and password.
+- **Third-party Integration**: Buttons for Google, GitHub, and LinkedIn for quick redirection to respective accounts.
+- **Stylish Design**: Modern UI with gradient themes and clean layouts.
 
-2. **Task Board (Main Window)**  
-   - **Add Task**: Create new tasks in the **To Do** column.
-   - **Task Columns**: To Do, In Progress, Code Review, QA, and Done.
-   - **Drag and Drop**: Move tasks between columns by clicking and dragging the task cards.
-   - **Delete Task**: Right-click (context menu) to delete a task.
-   - **Task Description**: Click into the card text to edit the task description.
-   - **Search Box**: Placeholder in the UI, not fully implemented in this snippet, but styled.
+### Task Management (Main Window)
+- **Add Task**: Create tasks in the "To Do" column with a single click.
+- **Drag & Drop**: Move tasks across columns to update their status dynamically.
+- **Task Deletion**: Right-click on a task to delete it.
+- **Task Description Editing**: Click into a task card to update its details.
+- **Real-time Updates**: Tasks are saved to a local SQLite database for persistence.
 
-3. **Data Persistence**  
-   - Tasks are saved in an **SQLite** database using Entity Framework Core (via `TaskBoardContext`).
-   - When the application starts, it ensures the database is created (`EnsureCreated`).
+### User Interface
+- **Gradient Design**: A visually appealing gradient background and card styling.
+- **Responsive Design**: Smooth interactions for task creation and movement.
+- **Search Bar**: Placeholder for searching tasks (UI available but not fully implemented).
+
+---
+
+## Screenshots
+
+### Task Board (Main Window)
+![Task Board](./path_to_screenshot_1.png)
+
+The task board is divided into five stages:
+- **To Do**: For newly created tasks.
+- **In Progress**: Tasks currently being worked on.
+- **Code Review**: Tasks under review by peers.
+- **QA**: Tasks under quality testing.
+- **Done**: Completed tasks.
+
+### Login Page
+![Login Page](./path_to_screenshot_2.png)
+
+The login page features:
+- An option to sign in using an email and password.
+- Buttons for Google, GitHub, and LinkedIn integration.
+- A clean "Sign Up" section for potential future user registration.
 
 ---
 
 ## Technologies
 
-- **.NET 6+ / .NET Framework** 
-- **WPF (Windows Presentation Foundation)** for the UI
-- **SQLite** (via [SQLitePCL](https://github.com/ericsink/SQLitePCL.raw) and EF Core)
-- **C#** as the primary programming language
+- **WPF (Windows Presentation Foundation)** for building the UI.
+- **SQLite** for local data storage using Entity Framework Core.
+- **C#** as the core programming language.
+- **Modern UI Design** with gradient colors and responsive components.
 
-
+---
 
