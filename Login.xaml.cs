@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace ProjectManagementApplication
 {
@@ -82,6 +85,34 @@ namespace ProjectManagementApplication
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+        
+
+        private void Button_Google(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://www.google.com",
+                UseShellExecute = true,
+            });
+        }
+
+        private void Button_Linkedin(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://www.linkedin.com/in/balgin/",
+                UseShellExecute = true,
+            });
+        }
+
+        private void Button_Github(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/BalginB",
+                UseShellExecute = true,
+            });
         }
 
     }

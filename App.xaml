@@ -141,9 +141,19 @@
         <Style x:Key="gradientColor" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="2,4">
-                        <GradientStop Color="#4B0082" Offset="0"/>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#6D458C" Offset="0"/>
                         <GradientStop Color="#FF69B4" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="gradientColorBtn" TargetType="Border">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#EEB8FF" Offset="0"/>
+                        <GradientStop Color="#C08FE6" Offset="1"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -188,7 +198,7 @@
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#5D467A" Offset="0"/>
+                        <GradientStop Color="#EEB8FF" Offset="0"/>
                         <GradientStop Color="#9C7CAE" Offset="1"/>
                     </LinearGradientBrush>
                 </Setter.Value>
@@ -196,7 +206,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="1" BorderBrush="#2D133D" Padding="10">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="1" BorderBrush="#9434B2" Padding="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -207,9 +217,9 @@
 
 
         <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="#5D467A"/>
+            <Setter Property="Background" Value="#EEB8FF"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#775A91"/>
+            <Setter Property="BorderBrush" Value="#EEB8FF"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="FontSize" Value="13"/>
@@ -231,7 +241,7 @@
 
         <!-- Стиль для кнопки -->
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#5D467A"/>
+            <Setter Property="Background" Value="#EEB8FF"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#775A91"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -263,8 +273,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
 
 
 

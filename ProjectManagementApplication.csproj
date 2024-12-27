@@ -13,6 +13,7 @@
     <None Remove="Images\Email.png" />
     <None Remove="Images\facebook.png" />
     <None Remove="Images\google.png" />
+    <None Remove="Images\icons8-github-32.png" />
     <None Remove="Images\linkedin.png" />
     <None Remove="Images\Lock.png" />
   </ItemGroup>
@@ -49,10 +50,10 @@
     <Resource Include="Images\Email.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\facebook.png">
+    <Resource Include="Images\google.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\google.png">
+    <Resource Include="Images\icons8-github-32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\linkedin.png">
