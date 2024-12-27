@@ -33,7 +33,7 @@ namespace ProjectManagementApplication
             // Создаем новую задачу в базе данных
             var taskItem = new TaskItem
             {
-                Description = "Введите описание задачи",
+                Description = "Write task description here..",
                 Status = status
             };
 
@@ -49,12 +49,12 @@ namespace ProjectManagementApplication
         {
             var taskContainer = new Border
             {
-                Background = new SolidColorBrush(Color.FromRgb(92, 90, 132)),
+                Background = new SolidColorBrush(Color.FromRgb(119, 90, 145)),
                 CornerRadius = new CornerRadius(10),
                 Margin = new Thickness(5),
                 Padding = new Thickness(10),
                 Width = 150,
-                Height = 85,
+                Height = 95,
                 Tag = taskItem.ID // Используем Tag для хранения ID задачи
             };
 
@@ -82,7 +82,7 @@ namespace ProjectManagementApplication
 
             taskDescriptionInput.GotFocus += (s, args) =>
             {
-                if (taskDescriptionInput.Text == "Введите описание задачи")
+                if (taskDescriptionInput.Text == "Write task description here..")
                 {
                     taskDescriptionInput.Text = string.Empty;
                 }
@@ -92,16 +92,16 @@ namespace ProjectManagementApplication
             {
                 if (string.IsNullOrWhiteSpace(taskDescriptionInput.Text))
                 {
-                    taskDescriptionInput.Text = "Введите описание задачи";
+                    taskDescriptionInput.Text = "Write task description here..";
                 }
             };
 
             // Событие для сохранения изменений описания
             taskDescriptionInput.LostFocus += (s, e) =>
             {
-                if (string.IsNullOrWhiteSpace(taskDescriptionInput.Text) || taskDescriptionInput.Text == "Введите описание задачи")
+                if (string.IsNullOrWhiteSpace(taskDescriptionInput.Text) || taskDescriptionInput.Text == "Write task description here..")
                 {
-                    taskDescriptionInput.Text = "Введите описание задачи";
+                    taskDescriptionInput.Text = "Write task description here..";
                 }
                 else
                 {
@@ -137,13 +137,11 @@ namespace ProjectManagementApplication
 
                     if (!isDragging)
                     {
-                        // Проверяем, переместилась ли мышь достаточно, чтобы начать перетаскивание
                         if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                             Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
                         {
                             isDragging = true;
 
-                            // Инициируем операцию перетаскивания
                             try
                             {
                                 DragDrop.DoDragDrop(taskContainer, new DataObject(typeof(Border), taskContainer), DragDropEffects.Move);
@@ -151,7 +149,7 @@ namespace ProjectManagementApplication
                             catch (InvalidOperationException ex)
                             {
                                 Debug.WriteLine($"DragDrop exception: {ex.Message}");
-                                // Опционально: уведомить пользователя или обработать ошибку иначе
+                                //уведомить пользователя или обработать ошибку иначе
                             }
                         }
                     }
@@ -168,11 +166,15 @@ namespace ProjectManagementApplication
                 Children = { taskIdTextBlock, taskDescriptionInput }
             };
 
-            // Добавляем контекстное меню для удаления задачи
+            // Создаем контекстное меню
             var contextMenu = new ContextMenu();
             var deleteMenuItem = new MenuItem
             {
                 Header = "Delete",
+                Background = new SolidColorBrush(Color.FromRgb(119, 90, 145)),
+                Foreground = Brushes.White,
+                BorderThickness = new Thickness(0),
+
             };
 
             deleteMenuItem.Click += (s, e) =>
@@ -191,7 +193,7 @@ namespace ProjectManagementApplication
                 {
                     _context.TaskItems.Remove(taskToRemove);
                     _context.SaveChanges();
-                    Debug.WriteLine($"Удалена задача с ID: {id}");
+                    Debug.WriteLine($"Task with ID :{id} was deleted");
                 }
             };
 
@@ -321,5 +323,7 @@ namespace ProjectManagementApplication
         {
             Application.Current.Shutdown();
         }
+
+      
     }
 }

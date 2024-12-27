@@ -17,9 +17,9 @@
         <Border Style="{StaticResource gradientColor}">
             <Grid>
                 <Canvas>
-                    <Polygon Points="0, 20 230, 140 0, 270" Fill="#9C7CAE"/>
-                    <Polygon Points="100, 400 200, 370 180, 470" Fill="#503A5D"/>
-                    <Ellipse Margin="250 350 0 0" Width="40" Height="40" Fill="#8a33cc"/>
+                    <Polygon Points="0, 20 230, 140 0, 270" Fill="#8a33cc"/>
+                    <Polygon Points="100, 400 200, 370 180, 470" Fill="#8a33cc"/>
+                    <Ellipse Margin="250 350 0 0" Width="40" Height="40" Fill="#A18AAE"/>
                     <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#A18AAE"/>
                 </Canvas>
                 <StackPanel VerticalAlignment="Center">
@@ -29,26 +29,27 @@
                 </StackPanel>
             </Grid>
         </Border>
-    
-         <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
+
+        <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Sign in to App" Style="{StaticResource titleText}" Foreground="#8a33cc"/>
                 <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource buttonCircle}">
-                        <Image Source="/Images/google.png" Width="20" Height="20"/>
+
+                    <Button Style="{StaticResource buttonCircle}" Click="Button_Google">
+                        <Image Source="/Images/google.png" Width="26" Height="20"/>
                     </Button>
 
-                    <Button Style="{StaticResource buttonCircle}">
-                        <Image Source="/Images/facebook.png" Width="20" Height="20"/>
+                    <Button Style="{StaticResource buttonCircle}" Click="Button_Github">
+                        <Image Source="/Images/icons8-github-32.png" Width="26" Height="26"/>
                     </Button>
 
-                    <Button Style="{StaticResource buttonCircle}">
-                        <Image Source="/Images/linkedin.png" Width="20" Height="20"/>
+                    <Button Style="{StaticResource buttonCircle}" Click="Button_Linkedin">
+                        <Image Source="/Images/linkedin.png" Width="26" Height="20"/>
                     </Button>
                 </StackPanel>
 
                 <TextBlock Text="or use your email info:" Style="{StaticResource normalText}" Foreground="#878787" Margin="0 10 0 15"/>
-                
+
                 <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
@@ -77,6 +78,6 @@
 
 
             </StackPanel>
-         </Border>
+        </Border>
     </Grid>
 </Window>
